@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import time
 
 def sum_of_primes(n):
 	primes = [True]*(n + 1)
@@ -12,4 +13,7 @@ def sum_of_primes(n):
 	return sum
 
 if __name__ == "__main__":
+    start_time = time.time()
+
 	print(sum_of_primes(2000000))
+	print(time.time())
