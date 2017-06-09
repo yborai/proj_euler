@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import time 
 
 def num_sundays(start, finish):
 	days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]    #num days for each month
@@ -24,4 +25,7 @@ def num_sundays(start, finish):
 
 
 if __name__ == "__main__":
+	start_time = time.time()
+
 	print(num_sundays(1901, 2000))
+	print(time.time() - start_time)
