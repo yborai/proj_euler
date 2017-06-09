@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from functools import reduce
+import time
 
 def get_factors(num):
 	return [
@@ -30,6 +31,7 @@ def is_sum(num, guy):
 	return False
 
 if __name__ == "__main__":
+	start_time = time.time()
 	guy = []
 	total = 0
 	
@@ -39,8 +41,9 @@ if __name__ == "__main__":
 
 	print(guy) 
 
-	for c in range(20161):
+	for c in range(20161 + 1):
 		if not is_sum(c, guy):
 			total += c
 
 	print(total)
+	print((time.time() - start_time), 'seconds')
