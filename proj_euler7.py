@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import time
 
 def is_prime(num):
     for c in range(2, num):
@@ -6,14 +7,18 @@ def is_prime(num):
             return False
     return True
 
-lst = [2]
-counter = 3
 
-while not(len(lst) == 10001):
-	if is_prime(counter):
-		lst.append(counter)
-		print(counter)
+if __name__ == "__main__":
+	start_time = time.time()
+	lst = [2]
+	counter = 3
 
-	counter += 2
+	while not(len(lst) == 10001):
+		if is_prime(counter):
+			lst.append(counter)
+			print(counter)
 
-print(lst[len(lst)])
+		counter += 2
+
+	print(lst[len(lst)])
+	print(time.time() - start_time)
