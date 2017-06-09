@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import time
 
 def rank(hand, values):
 	temp = []
@@ -42,7 +43,6 @@ def rank(hand, values):
 		s_flag = True
 		rank = 4
 
-	print(hand[1:2], hand[4:5], hand[7:8], hand[10:11], hand[13:14])
 	if(hand[1:2] == hand[4:5] == hand[7:8] == hand[10:11] == hand[13:14]):
 		f_flag = True
 		rank = 5	
@@ -59,42 +59,49 @@ def rank(hand, values):
 		if(temp[4] == 12):
 			rank = 9
 
+	print(hand[1:2], hand[4:5], hand[7:8], hand[10:11], hand[13:14])
 	return (rank, temp)
 
 
+if __name__ == "__main__":
+    start_time = time.time()
+    values = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
+    P1wins = 0
+    P2wins = 0
+    priority1 = 0
+    priority2 = 0
+    order1 = []
+    order2 = []
 
-values = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
-P1wins = 0
-P2wins = 0
-priority1 = 0
-priority2 = 0
-order1 = []
-order2 = []
 
 
+    with open('poker.textile', 'r') as f:
+	    content = f.readlines()
 
-with open('poker.textile', 'r') as f:
-	content = f.readlines()
+    print(content[0])
 
-print(content[0])
+    for c in range(len(content)):
+	    priority1, order1 = rank(content[c][:15], values)
+	    priority2, order2 = rank(content[c][15:], values)
+	    print(priority1, priority2)
+	    print(order1, order2)
+	    if (priority1 > priority2):
+		    print('P1')
+		    P1wins += 1
+	    elif (priority1 < priority2):
+		    print('P2')
+		    P2wins += 1 
+	    else:
+		    for c in range(4, -1, -1):
+			    if (order1[c] > order2[c]):
+				    print('P1')
+				    P1wins += 1
+				    break
+			    elif (order1[c] < order2[c]):
+				    print('P2')
+				    P2wins += 1
+				    break
 
-for c in range(len(content)):
-	priority1, order1 = rank(content[c][:15], values)
-	priority2, order2 = rank(content[c][15:], values)
-	print(priority1, priority2)
-
-	if (priority1 > priority2):
-		P1wins += 1
-	elif (priority2 < priority1):
-		P2wins += 1 
-	else:
-		for c in range(4, -1, -1):
-			if (order1[c] > order2[c]):
-				P1wins += 1
-				break
-			elif (order1[c] < order2[c]):
-				P2wins += 1
-				break
-
-print(P1wins, P2wins)
+    print(P1wins, P2wins)
+    print(time.time() - start_time)
 
