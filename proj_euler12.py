@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from functools import reduce
+import time
 
 def hdtn(num):
 	cur_tn = 0
@@ -10,4 +11,7 @@ def hdtn(num):
 		    return(cur_tn) 
 
 if __name__ == "__main__":
+	start_time = time.time()
+
 	print(hdtn(500))
+	print(time.time() - start_time)
